@@ -120,11 +120,11 @@ def execute_commands():
         commands = INPUT_SCRIPT.split('\n')
         commands=" ;".join(list(filter(lambda x: x.strip() != "", commands)))
         try:
-            print("命令",command)
-            ssh.exec_command(command)
+            print("命令",commands)
+            ssh.exec_command(commands)
         except Exception as e:
             # 如果命令执行失败，则打印错误信息
-            print(f"Command '{command}' failed with error: {e}")
+            print(f"Command '{commands}' failed with error: {e}")
 if __name__ == '__main__':
     scp_process()
 
