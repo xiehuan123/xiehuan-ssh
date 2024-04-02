@@ -1,4 +1,4 @@
-name: 'scp-pipeline'
+name: 'xiehuan-ssh'
 description: 'Pipeline: scp'
 author: 'Scott Ng'
 inputs:

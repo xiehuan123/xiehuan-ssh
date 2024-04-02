@@ -57,7 +57,7 @@ see the [deploy.yml](./.github/workflows/deploy.yml) file for more detail imform
 #### scp pipeline
 ```yaml
 - name: scp pipeline
-  uses: cross-the-world/scp-pipeline@master
+  uses: xiehuan123/xiehuan-ssh@master
   with:
     host: ${{ secrets.DC_HOST }}
     user: ${{ secrets.DC_USER }}
@@ -73,7 +73,7 @@ see the [deploy.yml](./.github/workflows/deploy.yml) file for more detail imform
 #### local remote scp
 ```yaml
 - name: local remote scp
-  uses: cross-the-world/scp-pipeline@master
+  uses: xiehuan123/xiehuan-ssh@master
   with:
     host: ${{ secrets.DC_HOST }}
     user: ${{ secrets.DC_USER }}

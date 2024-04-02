@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: scp pipeline
-        uses: cross-the-world/scp-pipeline@master
+        uses: xiehuan123/xiehuan-ssh@master
         with:
           host: ${{ secrets.DC_HOST }}
           user: ${{ secrets.DC_USER }}
@@ -31,7 +31,7 @@ jobs:
             '.' => $TARGET_DIR
 
       - name: local remote scp 1
-        uses: cross-the-world/scp-pipeline@master
+        uses: xiehuan123/xiehuan-ssh@master
         with:
           host: ${{ secrets.DC_HOST }}
           port: ${{ secrets.DC_PORT }}
@@ -41,7 +41,7 @@ jobs:
           remote: /home/github/test/test1/
 
       - name: local remote scp 2
-        uses: cross-the-world/scp-pipeline@master
+        uses: xiehuan123/xiehuan-ssh@master
         env:
           TO_DIR: /home/github/test/test3/
         with:
@@ -53,7 +53,7 @@ jobs:
           remote: $TO_DIR
 
       - name: local remote scp 3
-        uses: cross-the-world/scp-pipeline@master
+        uses: xiehuan123/xiehuan-ssh@master
         env:
           TO_DIR: /home/github/test/test3/
         with:
