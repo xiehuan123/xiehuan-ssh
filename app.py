@@ -109,25 +109,18 @@ def scp_process():
                 for f in [f for f in glob(l2r.get('l'))]:
                     conn.put(f, remote_path=remote, recursive=True)
                     print(f"{f} -> {remote}")
+    execute_commands()
+       
+      
+        
+def execute_commands():
     with connect() as ssh:
-        print("执行终端命令",INPUT_SCRIPT)
-        execute_commands(INPUT_SCRIPT, ssh)
-        print("执行成功")
-        
-def execute_commands(command_string,ssh):
-    print("执行开始")
-    # 将字符串按行分割成命令列表
-    commands = command_string.split('\n')
-    
-    # 逐行执行命令
-    for command in commands:
-        # 忽略空行
-        if not command.strip():
-            continue
-        
+        print("执行开始")
+        # 将字符串按行分割成命令列表
+        commands = INPUT_SCRIPT.split('\n')
+        commands=" ;".join(list(filter(lambda x: x.strip() != "", commands)))
         try:
             print("命令",command)
-            # 使用subprocess模块执行命令
             ssh.exec_command(command)
         except Exception as e:
             # 如果命令执行失败，则打印错误信息
