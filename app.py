@@ -116,16 +116,18 @@ def scp_process():
 def execute_commands():
     with connect() as ssh:
         print("执行开始")
-        # 将字符串按行分割成命令列表
-        commands = INPUT_SCRIPT.split('\n')
-        commands=" ;".join(list(filter(lambda x: x.strip() != "", commands)))
+        commands = INPUT_SCRIPT
+        if commands ==""
+            return 
         try:
             print("命令",commands)
             stdin, stdout, stderr =ssh.exec_command(commands)
             #这里必须 加 等待 结果 
-            exit_status = stdout.channel.recv_exit_status()   
+            exit_status = stdout.channel.recv_exit_status()
+            print("等待开始")
             # 等待15s 然后关闭
-            time.sleep(15)
+            time.sleep(30)
+            print("等待结束")
             ssh.close()
         except Exception as e:
             # 如果命令执行失败，则打印错误信息
