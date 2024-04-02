@@ -20,7 +20,7 @@ INPUT_CONNECT_TIMEOUT = envs.get("INPUT_CONNECT_TIMEOUT", "30s")
 INPUT_SCP = envs.get("INPUT_SCP")
 INPUT_LOCAL = envs.get("INPUT_LOCAL")
 INPUT_REMOTE = envs.get("INPUT_REMOTE")
-INPUT_SCRIPT= envs.get("INPUT_SCRIPT")
+INPUT_SCRIPT = envs.get("INPUT_SCRIPT")
 
 seconds_per_unit = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800, "M": 86400*30}
 pattern_seconds_per_unit = re.compile(r'^(' + "|".join(['\\d+'+k for k in seconds_per_unit.keys()]) + ')$')
@@ -71,6 +71,7 @@ def progress(filename, size, sent):
     sys.stdout.write(f"{filename}... {float(sent)/float(size)*100:.2f}%\n")
 
 
+def scp_process():
     if (INPUT_KEY is None and INPUT_PASS is None) or (not INPUT_SCP and not (INPUT_LOCAL and INPUT_REMOTE)):
         print("SCP invalid (Script/Key/Passwd)")
         return
@@ -108,8 +109,7 @@ def progress(filename, size, sent):
                 for f in [f for f in glob(l2r.get('l'))]:
                     conn.put(f, remote_path=remote, recursive=True)
                     print(f"{f} -> {remote}")
-            execute_commands(INPUT_SCRIPT,ssh)
-    print("+++++++++++++++++++Pipeline: END SCP+++++++++++++++++++")
+            execute_commands(INPUT_SCRIPT, ssh)
 def execute_commands(command_string,ssh):
     # 将字符串按行分割成命令列表
     commands = command_string.split('\n')
@@ -126,14 +126,10 @@ def execute_commands(command_string,ssh):
         except Exception as e:
             # 如果命令执行失败，则打印错误信息
             print(f"Command '{command}' failed with error: {e}")
-# 处理参数
-def  convert_script():
-    if not INPUT_SCRIPT:
-        return None
-    for c in INPUT_SCRIPT:
-        script = script.strip(c)
-    return path.expandvars(script) if script != "." else f"{path.realpath(script)}"
 if __name__ == '__main__':
-    progress()
+    scp_process()
+
+
+
 
 
