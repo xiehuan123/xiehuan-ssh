@@ -117,7 +117,7 @@ def execute_commands():
     with connect() as ssh:
         print("执行开始")
         commands = INPUT_SCRIPT
-        if commands ==""
+        if commands =="":
             return 
         try:
             print("命令",commands)
