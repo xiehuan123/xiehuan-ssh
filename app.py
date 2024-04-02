@@ -134,6 +134,6 @@ def  convert_script():
         script = script.strip(c)
     return path.expandvars(script) if script != "." else f"{path.realpath(script)}"
 if __name__ == '__main__':
-    scp_process()
+    progress()
 
 
