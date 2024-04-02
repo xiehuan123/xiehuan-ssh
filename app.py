@@ -109,23 +109,23 @@ def scp_process():
                 for f in [f for f in glob(l2r.get('l'))]:
                     conn.put(f, remote_path=remote, recursive=True)
                     print(f"{f} -> {remote}")
-        print("执行开始")
-        commands = INPUT_SCRIPT
-        if commands =="":
-            return 
-        try:
-            print("命令",commands)
-            stdin, stdout, stderr =ssh.exec_command(commands)
-            #这里必须 加 等待 结果 
-            exit_status = stdout.channel.recv_exit_status()
-            print("等待开始")
-            # 等待15s 然后关闭
-            time.sleep(30)
-            print("等待结束")
-            ssh.close()
-        except Exception as e:
-            # 如果命令执行失败，则打印错误信息
-            print(f"Command '{commands}' failed with error: {e}")
+            print("执行开始")
+            commands = INPUT_SCRIPT
+            if commands =="":
+                return 
+            try:
+                print("命令",commands)
+                stdin, stdout, stderr =ssh.exec_command(commands)
+                #这里必须 加 等待 结果 
+                exit_status = stdout.channel.recv_exit_status()
+                print("等待开始")
+                # 等待15s 然后关闭
+                time.sleep(30)
+                print("等待结束")
+                ssh.close()
+            except Exception as e:
+                # 如果命令执行失败，则打印错误信息
+                print(f"Command '{commands}' failed with error: {e}")
        
       
         
