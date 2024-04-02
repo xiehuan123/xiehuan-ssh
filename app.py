@@ -8,7 +8,7 @@ import math
 import re
 import tempfile
 import os
-
+import time
 
 envs = environ
 INPUT_HOST = envs.get("INPUT_HOST")
@@ -121,7 +121,12 @@ def execute_commands():
         commands=" ;".join(list(filter(lambda x: x.strip() != "", commands)))
         try:
             print("命令",commands)
-            ssh.exec_command(commands)
+            stdin, stdout, stderr =ssh.exec_command(commands)
+            #这里必须 加 等待 结果 
+            exit_status = stdout.channel.recv_exit_status()   
+            # 等待15s 然后关闭
+            time.sleep(15)
+            ssh.close()
         except Exception as e:
             # 如果命令执行失败，则打印错误信息
             print(f"Command '{commands}' failed with error: {e}")
